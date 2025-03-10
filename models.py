@@ -12,14 +12,15 @@ class Base(AsyncAttrs, DeclarativeBase):
 
 
 class User(Base):
-    __table__ = 'users'
+    __tablename__ = 'users'
 
     id: Mapped[int] = mapped_column(primary_key=True)
     tg_id = mapped_column(BigInteger)
+    
 
 
 class Task(Base):
-    __table__ = 'tasks'
+    __tablename__ = 'tasks'
 
     id: Mapped[int] = mapped_column(primary_key=True)
     title: Mapped[str] = mapped_column(String(128))

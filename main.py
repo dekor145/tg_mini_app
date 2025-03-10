@@ -8,6 +8,15 @@ from models import init_db
 import requests as rq
 
 
+class AddTask(BaseModel):
+    tg_id: int
+    title: str
+
+
+class CompleteTask(BaseModel):
+    id: int
+
+
 @asynccontextmanager
 async def lifespan(app_: FastAPI):
     await init_db()
@@ -39,3 +48,15 @@ async def profile(tg_id: int):
     return {'completed_tasks_count': completed_tasks_count}
 
 
+@app.post("/api/add")
+async def add_task(task: AddTask):
+    user = await rq.add_user(task.tg_id)
+    await rq.add_task(user.id, task.title)
+    return {'status': 'ok'}
+
+
+@app.patch("/api/completed")
+async def complete_task(task: CompleteTask):
+    await rq.update_task(task.id)
+    return {'status': 'ok'}
+    
