@@ -28,7 +28,7 @@ app = FastAPI(title="To Do App", lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://humble-orbit-4jx9x794977h74vp-8000.app.github.dev"],
+    allow_origins=["https://todoapp-fe463.web.app"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
